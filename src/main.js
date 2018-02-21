@@ -8,13 +8,13 @@ import 'vuetify/dist/vuetify.min.css'
 import App from './App'
 import store from './store'
 import router from './router'
-import Rx from 'rxjs/Rx'
-import VueRx from 'vue-rx'
+// import Rx from 'rxjs/Rx'
+// import VueRx from 'vue-rx'
 import mixins from './mixins/base'
 
 Vue.config.productionTip = false
 
-Vue.use(VueRx, Rx)
+// Vue.use(VueRx, Rx)
 Vue.use(ElementUI)
 Vue.use(Vuetify)
 
