@@ -17,15 +17,15 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
-import {SET_SELECTED_BLOCK} from '@/store/mutation-types'
+import {mapState, mapActions} from 'vuex'
 export default {
   computed: {
     ...mapState(['blocks'])
   },
   methods: {
+    ...mapActions(['selectBlock']),
     handleDrag (_) {
-      this.$store.commit(SET_SELECTED_BLOCK, _)
+      this.selectBlock(_)
     }
   }
 }

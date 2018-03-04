@@ -46,3 +46,18 @@ export const toProps = ({config}) => {
     return pre
   }, {})
 }
+
+export const getOwnProperty = obj => {
+  return Object.keys(obj).reduce((pre, _) => {
+    pre[_] = obj[_]
+    return pre
+  }, {})
+}
+
+const mapStore = type => key => {
+  return parent.vm.$store[type][key]
+}
+
+export const mapActions = mapStore('actions')
+export const mapGetters = mapStore('getters')
+export const mapState = mapStore('state')

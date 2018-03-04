@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {broadcast} from '@/plugins/vuex-iframe-sync'
-import modules from './modules'
-import {spliceIf, guid} from '@/utils'
+import {tranfer, wrapMutations} from '@/plugins/vuex-iframe-sync'
+import {spliceIf} from '@/utils'
 import blocks from '@/blocks'
 import * as types from './mutation-types'
 
@@ -10,25 +9,14 @@ Vue.use(Vuex)
 
 const config = {
   state: {
-    pages: [],
     components: [],
     blocks,
     selectedPage: null,
     selectedComponent: null,
     selectedBlock: null
   },
-  getters: {
-  },
+  getters: {},
   mutations: {
-    [types.ADD_PAGE] (state, {id = guid(), label = `页面${state.pages.length + 1}`, children = []} = {}) {
-      state.pages.push({id, label, children})
-    },
-    [types.DEL_PAGE] (state, {id}) {
-      spliceIf(state.pages, _ => _.id === id)
-    },
-    [types.SET_PAGE] (state, pages) {
-      state.pages = pages
-    },
     [types.ADD_COMPONENT] (state, components) {
       if (Array.isArray(components)) {
         state.components = state.components.concat(components)
@@ -48,9 +36,6 @@ const config = {
       if (index < 0) return
       state.components[index] = Object.assign(state.components[index], options)
     },
-    [types.SET_SELECTED_PAGE] (state, page) {
-      state.selectedPage = page
-    },
     [types.SET_SELECTED_COMPONENT] (state, component) {
       state.selectedComponent = component
     },
@@ -65,7 +50,7 @@ const config = {
       }
       commit(types.SET_SELECTED_BLOCK, block)
     },
-    addComponent ({commit}, component) {
+    addComponent ({commit, state}, component) {
       commit(types.ADD_COMPONENT, component)
       commit(types.SET_SELECTED_COMPONENT, component)
     },
@@ -74,12 +59,13 @@ const config = {
       commit(types.SET_SELECTED_COMPONENT, null)
     }
   },
-  modules,
   plugins: [
-    broadcast('preview')
+    tranfer(window.parent.vm)
   ]
   // strict: process.env.NODE_ENV !== 'production'
 }
+
+config.mutations = wrapMutations(window.parent.vm, config.mutations)
 
 const store = new Vuex.Store(config)
 

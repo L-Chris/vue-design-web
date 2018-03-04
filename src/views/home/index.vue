@@ -30,11 +30,11 @@
       </v-expansion-panel>
     </v-navigation-drawer>
     <v-toolbar app fixed clipped-left height="48px">
-      <v-toolbar-title>vue-layout-demo</v-toolbar-title>
+      <v-toolbar-title>vue-design</v-toolbar-title>
     </v-toolbar>
     <v-content>
       <v-container fill-height>
-        <WorkspaceView/>
+        <iframe id="preview" src="preview.html" style="width:100%;height:100%;" frameborder="0"/>
       </v-container>
     </v-content>
     <v-footer app fixed>

@@ -5,22 +5,22 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 import {spliceIf} from '@/utils'
-import {DEL_COMPONENT, SET_SELECTED_COMPONENT} from '@/store/mutation-types'
+import {SET_SELECTED_COMPONENT} from '@/store/mutation-types'
 export default {
   computed: {
     ...mapState(['components'])
   },
   methods: {
+    ...mapActions(['deleteComponent']),
     handleSelect (e, _) {
       this.$store.commit(SET_SELECTED_COMPONENT, _.data)
     },
     handleDelete (e, _, node) {
       const children = node.parent.childNodes
       spliceIf(children, c => c.id === node.id)
-      this.$store.commit(DEL_COMPONENT, _)
-      this.$store.commit(SET_SELECTED_COMPONENT, null)
+      this.deleteComponent(_)
     }
   }
 }

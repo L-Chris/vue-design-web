@@ -1,12 +1,12 @@
 <template>
-  <section class="workspace view" @mousedown="selectComponent" @drop="handleDrop" @dragover.prevent="()=>{}">
+  <section id="app" @contextmenu.prevent="()=>{}" @mousedown="selectComponent" @drop="handleDrop" @dragover.prevent="()=>{}">
     <div ref="menu" :style="menu.style"/>
     <v-menu v-model="menu.visible" :activator="$refs['menu']">
       <v-list>
         <v-list-tile disabled>
           <v-list-tile-title>{{selectedComponent ? selectedComponent.label : ''}}</v-list-tile-title>
         </v-list-tile>
-        <v-list-tile v-ripple="true" @click="handleDeleteComponent">
+        <v-list-tile v-ripple="true" @mousedown="handleDeleteComponent">
           <v-list-tile-title>删除</v-list-tile-title>
         </v-list-tile>
       </v-list>
@@ -20,6 +20,7 @@ import {mapState, mapActions} from 'vuex'
 import {SET_SELECTED_COMPONENT, SET_SELECTED_BLOCK} from '@/store/mutation-types'
 import {guid} from '@/utils'
 export default {
+  name: 'Preview',
   data () {
     return {
       menu: {
@@ -30,13 +31,6 @@ export default {
   },
   computed: {
     ...mapState(['components', 'selectedComponent', 'selectedBlock'])
-  },
-  watch: {
-    selectedComponent (val) {
-      if (!val) {
-        this.resetMenu()
-      }
-    }
   },
   methods: {
     ...mapActions(['addComponent', 'deleteComponent']),
@@ -112,7 +106,18 @@ export default {
 </script>
 
 <style lang="scss">
-.menuable__content__active {
-  z-index: 9999!important;
+@import './styles/reset';
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  width: 100%;
+  color: #2c3e50;
+  font-size: 1.3rem;
+  .menuable__content__active {
+    z-index: 9999!important;
+    background-color: #ffffff;
+  }
 }
 </style>

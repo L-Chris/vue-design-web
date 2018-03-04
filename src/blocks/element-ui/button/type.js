@@ -18,14 +18,14 @@ export const setting = {
         {
           key: 'text',
           label: 'text',
-          type: String,
+          type: 'String',
           inputType: 'input',
           default: 'button'
         },
         {
           key: 'size',
           label: 'size',
-          type: String,
+          type: 'String',
           inputType: 'select',
           default: 'medium',
           data: [
@@ -37,7 +37,7 @@ export const setting = {
         {
           key: 'type',
           label: 'type',
-          type: String,
+          type: 'String',
           inputType: 'select',
           default: '',
           data: [
@@ -50,11 +50,58 @@ export const setting = {
           ]
         },
         {
-          key: 'loading',
-          label: 'loading',
-          type: Boolean,
+          key: 'plain',
+          label: 'plain',
+          type: 'Boolean',
           inputType: 'switch',
           default: false
+        },
+        {
+          key: 'round',
+          label: 'round',
+          type: 'Boolean',
+          inputType: 'switch',
+          default: false
+        },
+        {
+          key: 'loading',
+          label: 'loading',
+          type: 'Boolean',
+          inputType: 'switch',
+          default: false
+        },
+        {
+          key: 'disabled',
+          label: 'disabled',
+          type: 'Boolean',
+          inputType: 'switch',
+          default: false
+        },
+        {
+          key: 'icon',
+          label: 'icon',
+          type: 'String',
+          inputType: 'input',
+          default: ''
+        },
+        {
+          key: 'autofocus',
+          label: 'autofocus',
+          type: 'Boolean',
+          inputType: 'switch',
+          default: false
+        },
+        {
+          key: 'native-type',
+          label: 'native-type',
+          type: 'String',
+          inputType: 'select',
+          default: 'button',
+          data: [
+            { value: 'button', label: 'button' },
+            { value: 'submit', label: 'submit' },
+            { value: 'reset', label: 'reset' }
+          ]
         }
       ]
     }
